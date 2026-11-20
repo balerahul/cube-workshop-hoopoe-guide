@@ -1,0 +1,85 @@
+/* Additions to the shared workshop styles.css for the hoopoe jobs guide. */
+.job-options{grid-template-columns:repeat(4,1fr)}
+#job-status{color:var(--blue);font-weight:600;font-size:.87rem;margin:14px 0 6px}
+.table-wrap{overflow-x:auto;margin:22px 0 26px;border:1px solid var(--line);border-radius:9px}
+.facts{border-collapse:collapse;width:100%;font-size:.9rem;line-height:1.5}
+.facts th,.facts td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--line)}
+.facts th{background:#f2f7fb;font-weight:650;color:var(--muted);font-size:.82rem}
+.facts tr:last-child td{border-bottom:0}
+.facts code{white-space:nowrap}
+.script-view{border:1px solid #b9ccd9;border-radius:9px;margin:20px 0;overflow:hidden;background:#fbfcfd}
+.script-view>div{padding:7px 14px;border-bottom:1px solid #d5e2ea;background:#eaf1f6;font-size:.78rem;color:var(--muted);font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;overflow-wrap:anywhere}
+.script-view pre{margin:0;padding:16px 19px;font-size:.86rem;line-height:1.55;overflow:auto;color:#123f61}
+.script-view pre code{white-space:pre;background:none;padding:0}
+.expected pre code{white-space:pre;overflow-wrap:normal}
+.expected pre{overflow-x:auto;white-space:pre}
+.sbatch-lines dt code{font-size:.92em}
+.placeholder{border-left-width:6px}
+.pending-output{color:var(--amber);font-style:italic}
+@media(max-width:1080px){.job-options{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:780px){.job-options{grid-template-columns:1fr}.script-view pre{font-size:.78rem;padding:13px}.expected pre{font-size:.8rem}.facts{font-size:.84rem}.facts th,.facts td{padding:9px 10px}}
+@media print{.script-view,.table-wrap{break-inside:avoid}[data-job][hidden]{display:block!important}}
+.facts,.facts td{overflow-wrap:normal}
+@media(max-width:780px){
+  .table-wrap{border:0;overflow:visible}
+  .facts thead{display:none}
+  .facts,.facts tbody,.facts tr,.facts td{display:block;width:100%}
+  .facts tr{border:1px solid var(--line);border-radius:9px;margin:0 0 12px;padding:6px 0;background:#fbfcfd}
+  .facts td{border:0;padding:5px 14px}
+  .facts td::before{content:attr(data-label);display:block;font-size:.74rem;font-weight:650;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+  .facts code{white-space:normal}
+}
+
+/* ---- Redesign, 20 Nov: header job label, phone step menu, annotated scripts, job ID box, terminal output ---- */
+.job-chip{margin-left:auto;font-size:.84rem;text-decoration:none;color:var(--ink);background:var(--pale);border:1px solid #9db4c4;border-radius:999px;padding:6px 14px;white-space:nowrap}
+.job-chip strong{color:var(--blue)}
+.job-chip span{color:var(--muted)}
+.job-chip+.header-help{margin-left:0}
+.mobile-steps{display:none}
+/* annotated job script */
+.anno-script{border:1px solid #b9ccd9;border-radius:10px;margin:18px 0 26px;overflow:hidden;background:#fff}
+.anno-head{display:flex;justify-content:space-between;gap:12px;padding:8px 14px;background:#eaf1f6;border-bottom:1px solid #d5e2ea;font:600 .8rem "SFMono-Regular",Consolas,"Liberation Mono",monospace;color:var(--muted)}
+.anno-head a{font:400 .78rem -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.anno-lines{list-style:none;margin:0;padding:6px 0;counter-reset:line}
+.anno-lines li{display:grid;grid-template-columns:2.4em minmax(0,1.25fr) minmax(0,1fr);gap:0 14px;margin:0;padding:3px 14px 3px 6px;align-items:baseline;counter-increment:line}
+.anno-lines li::before{content:counter(line);text-align:right;font:.72rem "SFMono-Regular",Consolas,monospace;color:#9aabb8}
+.anno-lines li::marker{content:none}
+.anno-lines code{background:none;padding:0;font-size:.8rem;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;color:#123f61}
+.anno-lines .note{font-size:.84rem;line-height:1.45;color:var(--ink);border-left:3px solid var(--pale);padding-left:10px}
+.anno-lines li.l-sbatch code{color:#0d487b;font-weight:600}
+.anno-lines li.l-sbatch .note{border-left-color:#8cb3cb}
+.anno-lines li.l-comment code{color:#7c8d99;font-style:italic}
+.anno-lines li.l-blank{padding:2px 0}
+.anno-lines li:hover{background:#f5f9fc}
+.anno-legend{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.key-code,.key-note{font-size:.76rem;padding:2px 8px;border-radius:4px}
+.key-code{font-family:"SFMono-Regular",Consolas,monospace;background:#eaf1f6;color:#0d487b}
+.key-note{border-left:3px solid #8cb3cb;background:#f7fafc}
+/* job ID box */
+.jobid-box{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:22px 0;padding:16px 20px;border:2px solid var(--blue);border-radius:10px;background:#f4f9fd}
+.jobid-box label{font-weight:650;flex:1 1 280px}
+.jobid-box input{font:600 1.1rem "SFMono-Regular",Consolas,monospace;width:9ch;padding:8px 10px;border:1px solid #9db4c4;border-radius:6px;color:var(--ink)}
+.jobid-box input:focus-visible{outline:3px solid #d57812;outline-offset:2px}
+[data-jobid].filled{background:#fff3c4;border-radius:3px}
+/* what you type (light) vs what the screen shows (dark terminal) */
+.expected pre{background:#0f2231;color:#d9e7f0;border-radius:7px;padding:14px 16px;margin:10px 0 12px}
+.expected pre code{color:inherit}
+.expected.success pre{background:#0f2a22;color:#d6efe3}
+.expected.success code{color:inherit}
+.expected .pending-output{color:#ffcf8a}
+.expected>span::before{content:"▸ ";color:var(--muted)}
+.command>div span::before{content:"You type · ";font-weight:650;color:var(--blue)}
+@media(max-width:1080px){.anno-lines li{grid-template-columns:2em minmax(0,1fr) minmax(0,.9fr)}}
+@media(max-width:780px){
+  .job-chip{margin-left:0;order:3;font-size:.78rem;padding:4px 11px}
+  .mobile-steps{display:block;background:#fff;margin:-10px 0 20px;padding:0;border:1px solid var(--line);border-radius:9px}
+  .mobile-steps summary{padding:10px 14px}
+  .mobile-steps[open] summary{margin-bottom:0;border-bottom:1px solid var(--line)}
+  .mobile-steps nav{display:flex;flex-direction:column;padding:6px 0;max-height:60vh;overflow:auto}
+  .mobile-steps nav a{padding:8px 16px;text-decoration:none;font-size:.92rem}
+  .anno-lines li{grid-template-columns:1.8em minmax(0,1fr);padding:4px 10px 4px 2px}
+  .anno-lines .note{grid-column:2;margin:2px 0 6px;font-size:.8rem}
+  .anno-lines code{font-size:.74rem}
+  .jobid-box{padding:14px}
+}
+@media print{.job-chip,.mobile-steps,.jobid-box{display:none!important}.expected pre{background:#f3f3f3!important;color:#000!important}}
