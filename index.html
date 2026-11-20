@@ -132,7 +132,16 @@ Finished with exit code 0 at Friday 20 November 2026 07:36:47 AM IST
  
  elapse time =   35.271999999999998      (sec)
  normal end.</code></pre></div></div>
-  <div data-job="a100" hidden><div class="expected success"><span>Real job log of a100.sbatch on hoopoe</span><pre><code><span class="pending-output">Output not captured yet: this job is still waiting in the queue.</span></code></pre></div></div>
+  <div data-job="a100" hidden><div class="expected success"><span>Real job log of a100.sbatch on hoopoe</span><pre><code>Loading nvhpc-hpcx-cuda12/26.11
+  Loading requirement: hpcx
+`pkg-config --variable=compiler bcm` `pkg-config --cflags bcm` -c icns_example.f90
+`pkg-config --variable=compiler bcm` -o CUBE_ICNS icns_example.o `pkg-config --cflags bcm` `pkg-config --libs bcm`
+Started on node01 with GPU 2 at Friday 20 November 2026 07:45:38 AM IST
+NVIDIA A100-PCIE-40GB
+Finished with exit code 0 at Friday 20 November 2026 07:46:04 AM IST
+ 
+ elapse time =    22.08013600000000      (sec)
+ normal end.</code></pre><p>The two <code>Loading</code> lines come from <code>module load</code>. They are normal, not an error.</p></div></div>
   <div data-job="h100" hidden><div class="expected success"><span>Real job log of h100.sbatch on hoopoe</span><pre><code>`pkg-config --variable=compiler bcm` `pkg-config --cflags bcm` -c icns_example.f90
 `pkg-config --variable=compiler bcm` -o CUBE_ICNS icns_example.o `pkg-config --cflags bcm` `pkg-config --libs bcm`
 Started on node10 with GPU 6 at Friday 20 November 2026 07:16:32 AM IST
@@ -141,8 +150,14 @@ Finished with exit code 0 at Friday 20 November 2026 07:16:47 AM IST
  
  elapse time =    10.33590100000000      (sec)
  normal end.</code></pre></div></div>
-  <div data-job="multigpu" hidden><div class="expected success"><span>Real job log of multigpu.sbatch on hoopoe</span><pre><code><span class="pending-output">Output not captured yet: this job is still waiting in the queue.</span></code></pre></div></div>
-  <p>The first two lines are the build (<code>make</code>). A good run says <strong>exit code 0</strong> and ends with <code>normal end.</code> <code>elapse time</code> is CUBE’s own run time in seconds. The step-by-step progress is in <code>run.log</code>.</p>
+  <div data-job="multigpu" hidden><div class="expected success"><span>Real job log of multigpu.sbatch on hoopoe</span><pre><code>`pkg-config --variable=compiler bcm` `pkg-config --cflags bcm` -c icns_example.f90
+`pkg-config --variable=compiler bcm` -o CUBE_ICNS icns_example.o `pkg-config --cflags bcm` `pkg-config --libs bcm`
+Started on node10 with GPUs 0,1 at Friday 20 November 2026 04:54:33 PM IST
+Finished with exit code 0 at Friday 20 November 2026 04:54:40 PM IST
+ 
+ elapse time =    4.036417000000000      (sec)
+ normal end.</code></pre></div></div>
+  <p>The two <code>pkg-config</code> lines are the build (<code>make</code>). A good run says <strong>exit code 0</strong> and ends with <code>normal end.</code> <code>elapse time</code> is CUBE’s own run time in seconds. The step-by-step progress is in <code>run.log</code>.</p>
   <p>Ask Slurm how the job ended and how long it took:</p>
   <div class="command"><div><span>hoopoe</span><button type="button" class="copy-command">Copy</button></div><pre><code>sacct -j <span data-jobid>12345</span> -X -o JobID,JobName,Partition,State,Elapsed,ExitCode</code></pre></div>
   <div class="expected"><span>Real output on hoopoe, 20 November 2026</span><pre><code>JobID           JobName  Partition      State    Elapsed ExitCode 
