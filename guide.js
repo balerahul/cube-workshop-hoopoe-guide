@@ -2,7 +2,7 @@
   'use strict';
   // Job choices: the buttons in step 4 switch every [data-job] block and file name on the page.
   const jobs = {
-    cpu:      {label: 'the CPU job (LocalQ, 4 ranks)', file: 'cpu.sbatch', prefix: 'cpu', short: 'CPU'},
+    cpu:      {label: 'the CPU job (LocalQ, 12 ranks)', file: 'cpu.sbatch', prefix: 'cpu', short: 'CPU'},
     a100:     {label: 'the one-A100 job (gpu partition)', file: 'a100.sbatch', prefix: 'a100', short: '1 × A100'},
     h100:     {label: 'the one-H100 job (hgpuq partition)', file: 'h100.sbatch', prefix: 'h100', short: '1 × H100'},
     multigpu: {label: 'the two-H100 job (hgpuq, 2 ranks)', file: 'multigpu.sbatch', prefix: 'multigpu', short: '2 × H100'}
