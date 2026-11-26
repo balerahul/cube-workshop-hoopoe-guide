@@ -170,7 +170,10 @@ T_end = 0.005</code></pre></div></div>
   <div class="command"><div><span>hoopoe, in ~/icns2</span><button type="button" class="copy-command">Copy</button></div><pre><code>sbatch <span data-job-file>cpu.sbatch</span></code></pre></div>
   <p>This runs 100 steps instead of 1,000. Its final flow and force will differ from the full example, which is expected. The original file in <code>/storage/rahul-rcss/cube/examples/cylinder</code> stays unchanged.</p>
   <p>Keep output folder names such as <code>./output_icns/</code> in their original form. For CNS, retain the positive <code>density</code> entry under <code>[initial_condition]</code>.</p>
-  <p>The meaning of each setting is in the PDF parameter guides of the container package, and in the tutorial slides.</p>
+  <h3 id="parameter-guides">Parameter guides</h3>
+  <p>Every key in the <code>.toml</code> files is explained in three PDF guides for CUBE <code>b6d6cf6a</code>. Each row lists one key, its options and its default value.</p>
+  <div class="result-files" style="margin-bottom:1.15em"><dl><dt><a href="reference/cube_params_common.pdf" target="_blank" rel="noopener">cube_params_common.pdf</a></dt><dd>Keys used by both solvers, such as the mesh, the time step, the fluid and the output (9 pages).</dd><dt><a href="reference/cube_params_icns.pdf" target="_blank" rel="noopener">cube_params_icns.pdf</a></dt><dd>Keys read only by the ICNS solver (5 pages).</dd><dt><a href="reference/cube_params_cns.pdf" target="_blank" rel="noopener">cube_params_cns.pdf</a></dt><dd>Keys read only by the CNS solver (4 pages).</dd></dl></div>
+  <p>Open the guides on your own computer. The tutorial slides explain the main keys of this example.</p>
   <div class="checkpoint"><strong>You have changed a case when:</strong> the <code>icns2</code> run stops at step 100 and <code>run.log</code> ends with <code>normal end.</code></div>
 </section>
 
@@ -254,6 +257,7 @@ exec &quot;$@&quot;</code></pre></div>
   <details><summary>The job waits for a very long time</summary><p>Check <code>squeue -u $USER --start</code> and the free GPUs with <code>sinfo -p hgpuq -N -O NodeHost,StateLong,Gres,GresUsed:30</code>. Ask for fewer GPUs or a shorter <code>--time</code>, or use the CPU partition.</p></details>
   <details><summary>The results go missing or look mixed up</summary><p>Two jobs ran in the same folder and overwrote each other’s <code>output</code>. Use one folder per job (<a href="#copy">step 3</a>).</p></details>
   <p>Still stuck? Send the organizer your job ID, the folder name, and the last 20 lines of the job log: <code>tail -20 <span data-job-prefix>cpu</span>-<span data-jobid>12345</span>.log</code>.</p>
+  <details><summary>What does a setting in the .toml file mean?</summary><p>Open the <a href="#parameter-guides">parameter guides</a> in step 9. Find the table name in square brackets, such as <code>[time]</code>, and then the key, such as <code>T_end</code>.</p></details>
 </section>
 
 <section id="cheatsheet" class="guide-step"><div class="step-heading"><span>≡</span><h2>Command summary</h2></div>
